@@ -65,7 +65,7 @@ const ResponseType = (resType) => (target, p, descriptor) => {
 }
 
 // 显示请求Loading
-const Loading = () => (target, p, descriptor) => {
+const ShowLoading = () => (target, p, descriptor) => {
   if (descriptor) {
     descriptor.value.showLoading = true;
   }

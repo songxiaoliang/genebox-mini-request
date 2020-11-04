@@ -11,12 +11,14 @@ export default class RequestFactory {
 
   private baseUrl: string;
   private timeOut: number;
+  private loading: boolean;
   private headers: {[key: string]: any};
 
-  constructor(baseurl, timeout, headers) { 
+  constructor(baseurl, timeout, headers, loading) { 
     this.baseUrl = baseurl;
     this.timeOut = timeout;
     this.headers = headers;
+    this.loading = loading;
   };
 
   public setBaseUrl(bUrl: string): void {
@@ -30,6 +32,10 @@ export default class RequestFactory {
   public setHeaders(headers: {[key: string]: any}): void {
     this.headers = headers;
   }
+
+  public setEnableLoading(enable: boolean): void {
+    this.loading = enable;
+  }
   
   public getBaseUrl(): string {
     return this.baseUrl;
@@ -41,6 +47,10 @@ export default class RequestFactory {
 
   public getHeaders(): {[key: string]: any} {
     return this.headers;
+  }
+
+  public getShowLoading(): boolean {
+    return this.loading;
   }
 };
 
@@ -54,6 +64,7 @@ export class RequestBuilder {
 
   private baseurl: string = '';
   private timeout: number = 6000;
+  private showLoading: boolean = true;
   private header: {[key: string]: any} = {};
 
   baseUrl(url: string): RequestBuilder {
@@ -90,11 +101,17 @@ export class RequestBuilder {
     return this;
   }
 
+  enableLoading(enable: boolean) : RequestBuilder {
+    this.showLoading = enable;
+    return this;
+  }
+
   build = (): RequestFactory => {
     const factory = new RequestFactory(
       this.baseurl,
       this.timeout,
-      this.header
+      this.header,
+      this.showLoading
     );
     RequestFactory.instance = factory;
 

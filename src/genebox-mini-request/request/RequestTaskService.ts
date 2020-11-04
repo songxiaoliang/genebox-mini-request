@@ -35,7 +35,7 @@ const RequestTaskService = (args: RequestArgs) => (target, p, descriptor) => {
     config.data = params;
 
     // 请求Loading
-    config.showLoading = metaFunc.hideLoading || true;
+    config.showLoading = metaFunc.showLoading ?? RequestFactory.instance?.getShowLoading();
     // 超时时长
     config.timeout = (metaFunc.timeout || descriptor.value.timeout) 
     || RequestFactory.instance.getTimeout();
@@ -48,7 +48,6 @@ const RequestTaskService = (args: RequestArgs) => (target, p, descriptor) => {
     RequestTask(config).then((res) => {
       metaFunc.apply(target, res);
     }).catch((err) => {
-      alert(err)
       metaFunc.apply(target, {}, err);
     });
   }
