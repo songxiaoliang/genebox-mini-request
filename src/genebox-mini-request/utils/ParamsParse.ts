@@ -14,7 +14,8 @@ const ParamsParse = (args) => {
       url = url.url
     }
   } else {
-    // 多个参数, 取到第二个
+    // 多个参数, 第一个为url, 所以从第二个取到最后， 
+    // eg @GET('v1/{0}/{1}', 'arg1', 'arg2') => v1/arg1/arg2
     let _args = Array.prototype.slice.call(args, 1);
     url = url.replace(/\{(\d+)\}/g, (m, i) => {
       return _args[i];

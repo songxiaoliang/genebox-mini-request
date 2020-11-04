@@ -20,6 +20,7 @@ class App extends Component {
       .headers({                            // Header
         platform: 3,
       })
+      .enableLoading(false)                 // 是否开启Loading
       .addInterceptor(RequestInterceptor)   // 拦截器
       .enableLogInterceptor(true)           // 开启Log日志拦截器，默认关闭
       .enableTimeoutInterceptor(true)       // 开启请求超时拦截器，默认关闭
