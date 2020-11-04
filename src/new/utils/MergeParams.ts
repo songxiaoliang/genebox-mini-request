@@ -19,7 +19,10 @@ const MergeParams = (requestConfigArgs: RequestArgs, metaFuncArgs) => {
       }
     }
   }
-  return params;
+  return {
+    params,
+    url: requestConfigArgs.url
+  };
 }
 
 // key=value -> { key: value }

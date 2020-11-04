@@ -1,3 +1,5 @@
+
+import { ResponseCode, ResponseBody } from './response';
 import RequestFactory, { RequestBuilder } from './factory/RequestFactory';
 
 import {
@@ -30,6 +32,10 @@ export {
 
   // factory
   RequestFactory,
-  RequestBuilder
+  RequestBuilder,
+
+  // response
+  ResponseCode,
+  ResponseBody
 }
 

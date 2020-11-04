@@ -15,31 +15,32 @@ const RequestTaskService = (args: RequestArgs) => (target, p, descriptor) => {
   if (!descriptor) {
     return;
   }
-  const metaFunc: any = descriptor.value;
 
-  let config: RequestConfig;
-  let BaseUrl: string = metaFunc.baseUrl
-    || RequestFactory.instance.getBaseUrl();
+  const metaFunc: any = descriptor.value;
+  let config: RequestConfig = {};
+  const baseUrl: string = metaFunc.baseUrl || RequestFactory.instance?.getBaseUrl();
 
   descriptor.value = (...metaArgs: any): void => {
+    const { url, params } = MergeParams(args, metaArgs);
     // 请求地址
-    config.url = `${BaseUrl}${args.url}`;
+    config.url = `${baseUrl}${url}`;
     // 请求方式
     config.method = args.method;
     // 请求头
     config.header = {
-      ...RequestFactory.instance.getHeaders(),
+      ...RequestFactory.instance?.getHeaders(),
       ...(metaFunc.headers || descriptor.value.headers)
     };
     // 请求参数
-    config.data = MergeParams(args, metaArgs);
+    config.data = params;
+
     // 请求Loading
     config.showLoading = metaFunc.hideLoading || true;
     // 超时时长
     config.timeout = (metaFunc.timeout || descriptor.value.timeout) 
-    || RequestFactory.instance.getBaseUrl();
+    || RequestFactory.instance.getTimeout();
     // 返回值类型
-    config.dataType = metaFunc.dataType || descriptor.value.dataType;
+    config.dataType = metaFunc.dataType || descriptor.value.dataType || 'json';
     // 响应类型
     config.responseType = metaFunc.resType || descriptor.value.resType;
 
@@ -47,6 +48,7 @@ const RequestTaskService = (args: RequestArgs) => (target, p, descriptor) => {
     RequestTask(config).then((res) => {
       metaFunc.apply(target, res);
     }).catch((err) => {
+      alert(err)
       metaFunc.apply(target, {}, err);
     });
   }

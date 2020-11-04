@@ -1,21 +1,21 @@
 import { Chain } from "@tarojs/taro";
 
 type RequestConfig = {
-  url: string;
+  url?: string;
   // 请求方式
-  method: string;
+  method?: string;
   // 请求头
-  header: any;
+  header?: any;
   // 请求参数
-  data: any;
+  data?: any;
   // 返回值类型
-  dataType: string;
+  dataType?: string;
   // 超时时长
-  timeout: number;
+  timeout?: number;
   // 响应类型
-  responseType: string;
+  responseType?: string;
   // 请求Loading
-  showLoading: boolean;
+  showLoading?: boolean;
 };
 
 type RequestArgs = {

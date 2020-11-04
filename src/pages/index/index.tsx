@@ -3,7 +3,7 @@ import { View, Button, Text } from '@tarojs/components'
 import { observer, inject } from 'mobx-react'
 import LoginApi from '../../services/LoginApi';
 import './index.scss'
-import { RequestFactory, RequestBuilder } from '../../new';
+import { RequestFactory } from '../../new';
 
 type PageStateProps = {
   store: {
@@ -37,29 +37,10 @@ class Index extends Component {
     LoginApi.logout();
   }
 
-  init() {
-    const request: RequestFactory = new RequestBuilder()
-      .baseUrl("http://beta.genebox.cn/") // BaseUrl
-      .timeOut(666666)                     // 超时时长
-      .headers({                           // Header
-        platform: 3,  
-      })
-      .addInterceptor(() => {})            // 拦截器
-      .addInterceptor(() => {})
-      .enableLogInterceptor(true)          // 开启Log日志拦截器，默认关闭
-      .enableTimeoutInterceptor(true)      // 开启请求超时拦截器，默认关闭
-      .build();
-
-      // setter
-      request.setBaseUrl("");
-      request.setHeaders({});
-      request.setTimeout(6666);
-  }
-
   decrement = () => {
-    // LoginApi.login('topicId=5433d5e4e737cbe96dcef312', {
-    //   limit: 20
-    // });
+    LoginApi.login('topicId=5433d5e4e737cbe96dcef312', {
+      limit: 20
+    });
   }
 
   incrementAsync = () => {

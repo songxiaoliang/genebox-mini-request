@@ -13,10 +13,10 @@ export default class RequestFactory {
   private timeOut: number;
   private headers: {[key: string]: any};
 
-  constructor(baseurl, timeout, header) { 
+  constructor(baseurl, timeout, headers) { 
     this.baseUrl = baseurl;
     this.timeOut = timeout;
-    this.headers = header;
+    this.headers = headers;
   };
 
   public setBaseUrl(bUrl: string): void {
@@ -90,13 +90,14 @@ export class RequestBuilder {
     return this;
   }
 
-  build(): RequestFactory {
+  build = (): RequestFactory => {
     const factory = new RequestFactory(
       this.baseurl,
       this.timeout,
       this.header
     );
     RequestFactory.instance = factory;
+
     return factory;
   }
 }
