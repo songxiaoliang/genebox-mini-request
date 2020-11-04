@@ -3,7 +3,7 @@ import { View, Button, Text } from '@tarojs/components'
 import { observer, inject } from 'mobx-react'
 import LoginApi from '../../services/LoginApi';
 import './index.scss'
-import { RequestFactory } from '../../new';
+import { RequestFactory } from '../../genebox-mini-request';
 
 type PageStateProps = {
   store: {

@@ -4,7 +4,7 @@ import { Provider } from 'mobx-react'
 import counterStore from './store/counter'
 
 import './app.scss'
-import { RequestBuilder, RequestFactory } from './new'
+import { RequestBuilder, RequestFactory } from './genebox-mini-request'
 import RequestInterceptor from './pages/index/requestinterceptor'
 
 const store = {

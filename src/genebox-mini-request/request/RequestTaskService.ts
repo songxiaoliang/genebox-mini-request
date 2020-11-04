@@ -1,7 +1,7 @@
 
 import { MergeParams } from '../utils';
 import RequestTask from './RequestTask';
-import { RequestFactory } from '../../new';
+import { RequestFactory } from '..';
 import { RequestArgs, RequestConfig } from '../@types';
 
 /**

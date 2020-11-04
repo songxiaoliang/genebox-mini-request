@@ -1,4 +1,4 @@
-import { ResponseCode } from "../../new"
+import { ResponseCode } from "../../genebox-mini-request"
 const RequestInterceptor = (chain) => {
   const requestParams = chain.requestParams
 

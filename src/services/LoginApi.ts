@@ -1,4 +1,4 @@
-import { GET } from "../new";
+import { GET } from "../genebox-mini-request";
 
 class LoginApi {
   
