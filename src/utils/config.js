@@ -3,7 +3,8 @@ const CancelToken = {};
 
 // Custom instance defaults
 export const Create = config => (target, property, descriptor) => {
-    if (!descriptor) { // 避免在方法上添加
+    if (!descriptor) { 
+        // 避免在方法上添加
         target.prototype.axios = target.prototype.$axios = axios.create(config);
     }
 }
@@ -30,24 +31,7 @@ export const Config = config => (target, property, descriptor) => {
 export const Headers = headers => (target, property, descriptor) => {
     if (typeof headers === 'object') {
         if (descriptor) {
-            descriptor.value._headers = Object.assign({}, descriptor.value._headers, headers);
-          } else {
-            let instance = target.prototype.axios;
-            headers && Object.keys(headers).forEach((key) => {
-                if (!instance || headers.global) {
-                    if ('Content-Type' === key) {
-                        axios.defaults.headers.post[key] = headers[key];
-                    } else {
-                        axios.defaults.headers.common[key] = headers[key];
-                    }
-                } else {
-                    if ('Content-Type' === key) {
-                        axios.defaults.headers.post[key] = headers[key];
-                    } else {
-                        instance.defaults.headers.common[key] = headers[key];
-                    }
-                }
-            })
+          descriptor.value._headers = Object.assign({}, descriptor.value._headers, headers);
         }
     }
 }
