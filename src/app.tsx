@@ -27,9 +27,10 @@ class App extends Component {
       .build();
 
       // setter
-      // request.setBaseUrl("");
+      // request.setBaseUrl(""); 
       // request.setHeaders({});
       // request.setTimeout(6666);
+      // request.setEnableLoading(true);
   }
 
   componentDidMount () {}

@@ -43,13 +43,19 @@ const RequestTaskService = (args: RequestArgs) => (target, p, descriptor) => {
     config.dataType = metaFunc.dataType || descriptor.value.dataType || 'json';
     // 响应类型
     config.responseType = metaFunc.resType || descriptor.value.resType;
-
-    // 发起请求，将结果作为参数回传给原方法
-    RequestTask(config).then((res) => {
-      metaFunc.apply(target, res);
-    }).catch((err) => {
-      metaFunc.apply(target, {}, err);
-    });
+    const mock = metaFunc.mock || descriptor.value.mock;
+    // 是否开启 mock
+    if (process.env.NODE_ENV === 'development' && mock) {
+      // mock
+      metaFunc.apply(target, {});
+    } else {
+      // 发起请求，将结果作为参数回传给原方法
+      RequestTask(config).then((res) => {
+        metaFunc.apply(target, res);
+      }).catch((err) => {
+        metaFunc.apply(target, {}, err);
+      });
+    }
   }
 }
 

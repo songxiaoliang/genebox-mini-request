@@ -9,7 +9,7 @@ const POST = (...args) => RequestType('POST', args);
 const PUT = (...args) => RequestType('PUT', args);
 const DELETE = (...args) => RequestType('DELETE', args);
 
-const RequestType = (method, args) => {
+const RequestType = (method: string, args: any[]) => {
   const params = ParamsParse(args);
   const req = Object.assign({}, { method }, params);
   return RequestTaskService(req);

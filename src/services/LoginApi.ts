@@ -1,3 +1,4 @@
+import { Mock } from "@/genebox-mini-request/request/RequestConfig";
 import { GET } from "../genebox-mini-request";
 
 class LoginApi {
@@ -12,6 +13,7 @@ class LoginApi {
   }
 
   // @POST('https://cnodejs.org/api/v1/topics')
+  @Mock
   logout() {
 
   }
