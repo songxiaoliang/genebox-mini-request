@@ -1,4 +1,4 @@
-
+import LoadingManager from './loading';
 import { ResponseCode, ResponseBody } from './response';
 import RequestFactory, { RequestBuilder } from './factory/RequestFactory';
 
@@ -36,6 +36,9 @@ export {
 
   // response
   ResponseCode,
-  ResponseBody
+  ResponseBody,
+
+  // loading
+  LoadingManager
 }
 
