@@ -4,15 +4,15 @@
  */
 import Taro from '@tarojs/taro';
 import { RequestConfig } from '../@types';
+import LoadingManager from '../loading';
 import { ResponseBody, ResponseCode } from '../response';
 import RequestTaskManager from './RequestTaskManager';
 
 const RequestTask = (config: RequestConfig) => {
   return new Promise((resolve, reject) => {
     if (config.showLoading) {
-      Taro.showLoading();
+      LoadingManager.show();
     }
-    // 支持多种请求，中断某个
     const requestTask = Taro.request({
       url: config.url!,
       data: config.data,
@@ -24,7 +24,7 @@ const RequestTask = (config: RequestConfig) => {
       dataType: config.dataType,
       success: (res: any) => {
         if (config.showLoading) {
-          Taro.hideLoading();
+          LoadingManager.hide();
         }
         RequestTaskManager.popRequest({ url: config.url! });
         const { status, msg, data } = res;
@@ -32,7 +32,7 @@ const RequestTask = (config: RequestConfig) => {
       },
       fail: (err) => {
         if (config.showLoading) {
-          Taro.hideLoading();
+          LoadingManager.hide();
         }
         RequestTaskManager.popRequest({ url: config.url! });
         reject(err)
@@ -49,7 +49,7 @@ const RequestTask = (config: RequestConfig) => {
       const abortTimer = setTimeout(() => {
         clearTimeout(abortTimer);
         if (config.showLoading) {
-          Taro.hideLoading();
+          LoadingManager.hide();
         }
         requestTask.abort();
         RequestTaskManager.popRequest({ url: config.url! });
