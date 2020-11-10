@@ -1,4 +1,4 @@
-import { Chain } from "@tarojs/taro";
+import { Chain, RequestTask } from "@tarojs/taro";
 
 type RequestConfig = {
   url?: string;
@@ -26,8 +26,11 @@ type RequestArgs = {
 
 type InterceptorType = (chain: Chain) => any
 
+type RequestTree = { url: string, requestTask?: RequestTask<any>};
+
 export {
   RequestArgs,
+  RequestTree,
   RequestConfig,
   InterceptorType
 }

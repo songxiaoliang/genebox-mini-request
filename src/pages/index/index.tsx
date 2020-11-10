@@ -4,6 +4,7 @@ import { observer, inject } from 'mobx-react'
 import LoginApi from '../../services/LoginApi';
 import './index.scss'
 import { RequestFactory } from '../../genebox-mini-request';
+import RequestTaskManager from '@/genebox-mini-request/request/RequestTaskManager';
 
 type PageStateProps = {
   store: {
@@ -31,7 +32,9 @@ class Index extends Component {
 
   componentDidShow () { }
 
-  componentDidHide () { }
+  componentDidHide () {
+    RequestTaskManager.abortRequest({ url: ''});
+  }
 
   increment = () => {
     LoginApi.logout();

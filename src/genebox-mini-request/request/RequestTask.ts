@@ -5,12 +5,14 @@
 import Taro from '@tarojs/taro';
 import { RequestConfig } from '../@types';
 import { ResponseBody, ResponseCode } from '../response';
+import RequestTaskManager from './RequestTaskManager';
 
 const RequestTask = (config: RequestConfig) => {
   return new Promise((resolve, reject) => {
     if (config.showLoading) {
       Taro.showLoading();
     }
+    // 支持多种请求，中断某个
     const requestTask = Taro.request({
       url: config.url!,
       data: config.data,
@@ -24,6 +26,7 @@ const RequestTask = (config: RequestConfig) => {
         if (config.showLoading) {
           Taro.hideLoading();
         }
+        RequestTaskManager.popRequest({ url: config.url! });
         const { status, msg, data } = res;
         resolve(new ResponseBody(status, msg, data))
       },
@@ -31,10 +34,14 @@ const RequestTask = (config: RequestConfig) => {
         if (config.showLoading) {
           Taro.hideLoading();
         }
+        RequestTaskManager.popRequest({ url: config.url! });
         reject(err)
       }
     })
-
+    RequestTaskManager.addRequest({
+      url: config.url!,
+      requestTask,
+    });
     if (config.timeout &&
       typeof config.timeout === 'number' &&
       config.timeout > 1000
@@ -45,6 +52,7 @@ const RequestTask = (config: RequestConfig) => {
           Taro.hideLoading();
         }
         requestTask.abort();
+        RequestTaskManager.popRequest({ url: config.url! });
         resolve(new ResponseBody(ResponseCode.TIMEOUT, "网络请求超时", {}));
       }, config.timeout)
     }
