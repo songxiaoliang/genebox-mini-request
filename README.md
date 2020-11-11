@@ -3,7 +3,7 @@ genebox-mini-request 是一个基于JS Decorator 和 Taro 实现的网络请求�
 
 genebox-mini-request 基于 JS Decorator（AOP）和 Taro 实现的网络请求封装，建立于 Taro 网络请求基础上，对使用方式做了进一步优化。
 
-背景
+##### 背景
 当前小程序端网络请求模块使用 request utils 统一处理，通过配置请求模块，动态生成 request task，并通过该实例发起请求。额外的 options 配置参数需要单独传入高阶函数，目前仅支持header，超时时长配置。
 
 ##### 存在的问题：
