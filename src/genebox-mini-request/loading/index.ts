@@ -6,7 +6,7 @@ class LoadingManager {
 
   static show() {
     const currentRoute = this.getCurrentPage();
-    if(LoadingManager.routerMap.hasOwnProperty(currentRoute)) {
+    if(currentRoute in LoadingManager.routerMap) {
       LoadingManager.routerMap[currentRoute] = 1;
     } else {
       LoadingManager.routerMap[currentRoute]++;
@@ -16,7 +16,7 @@ class LoadingManager {
 
   static hide() {
     const currentRoute = LoadingManager.getCurrentPage();
-    if(LoadingManager.routerMap.hasOwnProperty(currentRoute)) {
+    if(currentRoute in LoadingManager.routerMap) {
       LoadingManager.routerMap[currentRoute]--;
     }
     LoadingManager.handleLoading();
