@@ -2,31 +2,35 @@ import Taro from '@tarojs/taro';
 
 class LoadingManager {
 
-  static routerMap = {};
+  static routerMap = new Map<String, number>();
 
   static show() {
     const currentRoute = this.getCurrentPage();
-    if(currentRoute in LoadingManager.routerMap) {
-      LoadingManager.routerMap[currentRoute] = 1;
+    let currentShowCount = LoadingManager.routerMap.get(currentRoute);
+    if(!currentShowCount) {
+        currentShowCount = 1;
     } else {
-      LoadingManager.routerMap[currentRoute]++;
+        currentShowCount += 1;
     }
+    LoadingManager.routerMap.set(currentRoute, currentShowCount);
     LoadingManager.handleLoading();
   }
 
   static hide() {
     const currentRoute = LoadingManager.getCurrentPage();
-    if(currentRoute in LoadingManager.routerMap) {
-      LoadingManager.routerMap[currentRoute]--;
+    let currentShowCount = LoadingManager.routerMap.get(currentRoute);
+    if(currentShowCount) {
+        currentShowCount -= 1;
+        LoadingManager.routerMap.set(currentRoute, currentShowCount);
     }
     LoadingManager.handleLoading();
   }
 
-  static getCurrentPage() {
-    return Taro.getCurrentPages().slice(-1, 1).route;
+  static getCurrentPage(): string {
+    return Taro.getCurrentPages().slice(-1, 1)[0].route;
   }
 
-  static handleLoading() {
+  static handleLoading(): void {
     if(LoadingManager.routerMap[LoadingManager.getCurrentPage()] > 0) {
       Taro.showLoading();
     } else {
