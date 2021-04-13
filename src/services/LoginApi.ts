@@ -1,5 +1,5 @@
 import { Mock } from "@/genebox-mini-request/request/RequestConfig";
-import { GET } from "../genebox-mini-request";
+import { GET } from "../..";
 
 class LoginApi {
   
