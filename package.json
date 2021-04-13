@@ -1,7 +1,6 @@
 {
   "name": "genebox-mini-request",
   "version": "1.0.1",
-  "private": true,
   "description": "genebox-mini-request aop utils",
   "templateInfo": {
     "name": "mobx",
