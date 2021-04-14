@@ -23,6 +23,6 @@ class Test {
   a: UserWithoutEmail1;
 
   runTest(): void {
-    // this.a.
+    this.a.
   }
 }

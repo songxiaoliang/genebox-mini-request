@@ -1,6 +1,6 @@
-import LoadingManager from './src/genebox-mini-request/loading';
-import { ResponseCode, ResponseBody } from './src/genebox-mini-request/response';
-import RequestFactory, { RequestBuilder } from './src/genebox-mini-request/factory/RequestFactory';
+import LoadingManager from './loading';
+import { ResponseCode, ResponseBody } from './response';
+import RequestFactory, { RequestBuilder } from './factory/RequestFactory';
 
 import {
   GET,
@@ -13,7 +13,7 @@ import {
   DataType,
   Loading,
   ResponseType
-} from './src/genebox-mini-request/request';
+} from './request';
 
 export {
   // request type
